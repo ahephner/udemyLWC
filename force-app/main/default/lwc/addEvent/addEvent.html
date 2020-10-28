@@ -1,0 +1,21 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Event Info" icon-name="standard:record">
+       <div class='slds-m-around_small'>
+           <lightning-input type="text" variant="standard" name="Name__c" label="Name" onchange={handleChange}></lightning-input>
+           <c-customlwclookup object-name='Event_Organizer__c' field-name='Name' 
+                            parentidfield='Event_Organizer__c' label='Event Organizer' 
+                            icon='standard:people' onselect={handleSelect}></c-customlwclookup>
+           <lightning-input type="datetime" variant="standard" name="Start__c" label="Start Date" onchange={handleChange}></lightning-input>
+           <lightning-input type="datetime" variant="standard" name="End__c" label="End Date" onchange={handleChange}></lightning-input>
+           <lightning-input type="number" variant="standard" name="Max_Seats__c" label="Max Attendees" onchange={handleChange}></lightning-input>
+           
+           <c-customlwclookup object-name='Location__c' 
+                              field-name='Name' 
+                              parentidfield='Location__c  ' label='Event Location' 
+                              icon='utility:location'
+                              onselect={handleSelect}></c-customlwclookup>
+           <lightning-input-rich-text variant="standard" name='Event_Detail__c' label='Event Detail' onchange={handleChange}></lightning-input-rich-text>
+
+       </div>
+    </lightning-card>
+</template>

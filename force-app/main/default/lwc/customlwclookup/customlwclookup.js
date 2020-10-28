@@ -44,7 +44,7 @@ export default class Customlwclookup extends LightningElement {
             window.console.log(' error ', error);
         });
     }
-
+//sends the selected event to the parent component
     handleSelect(event) {
         var selectedVal = event.detail.selRec;
         this.selectedRecord =  selectedVal;

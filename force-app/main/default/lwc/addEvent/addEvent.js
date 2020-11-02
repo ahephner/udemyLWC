@@ -24,12 +24,12 @@ export default class AddEvent extends NavigationMixin(LightningElement) {
         Event_Detail__c: ''
     }
     @track errors; 
-
+    
     handleChange(e){
         let rec = e.target.value;
         let name = e.target.name; 
         console.log('rec '+ rec + ' name '+ name);
-        console.log(this.newRec.Location__c)
+       
         this.newRec[name] = rec; 
     }
 
@@ -44,6 +44,8 @@ export default class AddEvent extends NavigationMixin(LightningElement) {
     }
 
     handleClick(){
+        console.log('name '+ this.newRec.Name__c);
+        
         const fields = {}; 
         fields[Name__c.fieldApiName] = this.newRec.Name__c; 
         fields[Event_Organizer__c.fieldApiName] = this.newRec.Event_Organizer__c;

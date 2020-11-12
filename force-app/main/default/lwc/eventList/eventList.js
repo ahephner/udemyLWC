@@ -20,13 +20,14 @@ const columns = [
 export default class EventList extends LightningElement { 
     error; 
     @track dataList;
+    @track recordsToDisplay; 
     columnsList = columns; 
     connectedCallback(){ 
     // console.log('callback');
         
         this.futureApex();
     }
-
+    
     futureApex(){ 
       //  console.log('future');
         
@@ -39,6 +40,7 @@ export default class EventList extends LightningElement {
                 element.Location = element.Location__r.Name; 
             });
             this.dataList = result;
+            this.recordsToDisplay = result; 
             console.log('data '+result);
             
             this.error = undefined; 
@@ -47,5 +49,29 @@ export default class EventList extends LightningElement {
             this.data = undefined; 
         });
     }
+//search for events
+//need to figure out a way to say if filteredEvents is undefined or null don't change. THis is just watching keyword no worry for waht is actually returned. 
+    handleSearch(event) {
+        window.clearTimeout(this.delayTimeout);
+      let keyword = event.detail.value;
+      console.log('here '+ keyword);
+      
+      let filteredEvents = this.dataList.filter((record, index, arrayobject) => {
+        return record.Name__c.toLowerCase().includes(keyword.toLowerCase()); // Event - event
+        // Tst - tst
+      });
+   console.log('fe ' +filteredEvents);
+   
+      
+      if (keyword && keyword.length >= 2) {
+        this.recordsToDisplay = filteredEvents;
+      } else if(keyword.length <= 1) {
+        console.log('else if');
+        
+        this.recordsToDisplay = this.dataList;
+      }
+    
+  }
+ 
 }
 
